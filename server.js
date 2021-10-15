@@ -2,12 +2,18 @@ const net = require('net');
 
 // Create a server object
 const server = net.createServer((socket) => {
+  function sendPing(socket) {
+    socket.write('ping\n');
+  }
   socket.on('data', (data) => {
     console.log(data.toString());
   });
 
   socket.write('SERVER: Hello! This is server speaking.\n');
-  socket.end('SERVER: Closing connection now.\n');
+  var intervalID = setInterval(sendPing, 1000, socket);
+  // socket.write('ping\n');
+
+  // socket.end('SERVER: Closing connection now.\n');
 }).on('error', (err) => {
   console.error(err);
 });

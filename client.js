@@ -8,7 +8,7 @@ const client = net.createConnection({ port: 9898 }, () => {
 
 client.on('data', (data) => {
   console.log(data.toString());
-  client.end();
+  // client.write('pong')
 });
 
 client.on('end', () => {
